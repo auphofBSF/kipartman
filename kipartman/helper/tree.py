@@ -112,9 +112,12 @@ class TreeModel(wx.dataview.PyDataViewModel):
         return len(obj.childs)
     
     def IsContainer(self, item):
+        # print('DEBUG: IsContainer ItemtoObject:')
+        # print('DEBUG:%s'%(item))
         if not item:
             return True
         obj = self.ItemToObject(item)
+        # print('DEBUG: IsContainer ItemtoObject:%s'%(obj))
         if obj:
             return obj.IsContainer()
         return False
@@ -135,6 +138,7 @@ class TreeModel(wx.dataview.PyDataViewModel):
     
     def GetValue(self, item, col):
         obj = self.ItemToObject(item)
+        # print ('Debug:%s'%(obj))
         value = obj.GetValue(col)
         if value is None:
             return ""
@@ -261,7 +265,9 @@ class TreeManager(object):
         
         TreeManager.drag_item = event.GetItem()
         TreeManager.drag_source = self
-        
+        # import pdb
+        # pdb.set_trace()
+ 
         if self.drag_item is None:
             event.Skip()
             return wx.DragCancel
